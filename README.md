@@ -3,7 +3,7 @@ This is minimal executable ELF binary for ARM, that just returns exit code 42.
 Instructions:
 =============
 * $ git submodule init
-* $ git submodule sync
+* $ git submodule update
 * $ make
 
 This will produce binary called tiny, it is 48 bytes long.
