@@ -16,13 +16,6 @@ rand_seed:       .word      0xfee1dead                      @   e_flags
                  .word      0x200034                        @   e_ehsize & e_phentsize @ luckily valid instruction 
                  svc        1                               @   e_phnum & e_shentsize
 symboltable:     .ascii     ".:;!]&@#"
-print_char:      mov        r7, #4
-                 mov        r0, #2
-                 adr        r1, symboltable
-                 add        r1, r1, r3
-                 mov        r2, #1
-                 svc        0
-                 bx         lr
 rand_multiplyer: .word      22695477
 main:            ldr        r4, rand_seed
                  ldr        r0, loop_count
@@ -39,7 +32,12 @@ loop:            pop        {r4}
                  push       {r3}
                  and        r3, r3, #458752
                  asr        r3, r3, #16
-                 bl         print_char
+print_char:      mov        r7, #4
+                 mov        r0, #1
+                 adr        r1, symboltable
+                 add        r1, r1, r3
+                 mov        r2, #1
+                 svc        0
                  b          loop
 end:             mov        r7, #1
                  mov        r0, #42
