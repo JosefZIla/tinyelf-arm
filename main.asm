@@ -12,7 +12,7 @@
                  bump       main                            @   e_entry                @ p_memsz
                  .word      4                               @   e_phoff                @ p_flags
 loop_count:      .word      0x00000BB9                      @   e_shoff                @ p_allign
-rand_multiplyer: .word      0x41A7                          @   e_flags
+rand_multiplier: .word      0x41A7                          @   e_flags
 rand_seed:       .word      0x200034                        @   e_ehsize & e_phentsize
                  .word      1                               @   e_phnum & e_shentsize
 symboltable:     .ascii     ".:;!]&@#"
@@ -22,12 +22,12 @@ main:            ldr        r4, rand_seed
 loop:            pop        {r0,r4}
                  subs       r0, r0, #1
                  beq        end
-                 ldr        r5, rand_multiplyer
+                 ldr        r5, rand_multiplier
                  mov        r3, #1
                  mla        r3, r4, r5, r3
                  push       {r0,r3}
-                 and        r3, r3, #458752
-                 asr        r3, r3, #16
+                 and        r3, r3, #0x70000
+                 asr        r3, r3, #0x10
 print_char:      mov        r7, #4
                  mov        r0, #1
                  adr        r1, symboltable
