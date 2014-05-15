@@ -3,6 +3,7 @@ PREFIX=arm-eabi-
 BIN=$(CROSSDIR)/bin
 AS=$(BIN)/$(PREFIX)as
 OBJCOPY=$(BIN)/$(PREFIX)objcopy
+READELF=$(BIN)/$(PREFIX)readelf
 
 DEVICE_DIRECTORY=/sdcard
 
@@ -28,3 +29,6 @@ uninstall:
 
 test: install
 	./test.sh
+
+readelf: tiny
+	$(READELF) -a $<
